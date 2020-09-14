@@ -1,1 +1,128 @@
+from openpyxl import *
+import collections
+workbook = load_workbook('TFT Set 4 PBE.xlsx')
+ws = workbook[workbook.sheetnames[0]]
+
+games = []
+carouselComp1 = []
+comp2 = []
+comp3 = []
+comp4 = []
+fullItem1 = []
+fullItem2 = []
+fullItem3 = []
+fullItem4 = []
+trait1 = []
+trait2 = []
+trait3 = []
+placement = []
+notes = []
+
+for col in ws.iter_cols(min_row=42, min_col=1, max_row=76, max_col=1):
+    for cell in col:
+        games.append(cell.value)
+    # print(games)
+
+for col in ws.iter_cols(min_row=42, min_col=2, max_row=76, max_col=2):
+    for cell in col:
+        carouselComp1.append(cell.value)
+
+for col in ws.iter_cols(min_row=42, min_col=3, max_row=76, max_col=3):
+    for cell in col:
+        comp2.append(cell.value)
+
+for col in ws.iter_cols(min_row=42, min_col=4, max_row=76, max_col=4):
+    for cell in col:
+        comp3.append(cell.value)
+
+for col in ws.iter_cols(min_row=42, min_col=5, max_row=76, max_col=5):
+    for cell in col:
+        comp4.append(cell.value)
+
+for col in ws.iter_cols(min_row=42, min_col=6, max_row=76, max_col=6):
+    for cell in col:
+        fullItem1.append(cell.value)
+
+for col in ws.iter_cols(min_row=42, min_col=7, max_row=76, max_col=7):
+    for cell in col:
+        fullItem2.append(cell.value)
+
+for col in ws.iter_cols(min_row=42, min_col=8, max_row=76, max_col=8):
+    for cell in col:
+        fullItem3.append(cell.value)
+
+for col in ws.iter_cols(min_row=42, min_col=9, max_row=76, max_col=9):
+    for cell in col:
+        fullItem4.append(cell.value)
+
+for col in ws.iter_cols(min_row=42, min_col=10, max_row=76, max_col=10):
+    for cell in col:
+        trait1.append(cell.value)
+
+for col in ws.iter_cols(min_row=42, min_col=11, max_row=76, max_col=11):
+    for cell in col:
+        trait2.append(cell.value)
+
+for col in ws.iter_cols(min_row=2, min_col=12, max_row=76, max_col=12):
+    for cell in col:
+        trait3.append(cell.value)
+
+for col in ws.iter_cols(min_row=42, min_col=13, max_row=76, max_col=13):
+    for cell in col:
+        placement.append(cell.value)
+    # print(placement)
+for col in ws.iter_cols(min_row=42, min_col=14, max_row=76, max_col=14):
+    for cell in col:
+        notes.append(cell.value)
+
+
+class My_Dictionary(dict):
+    def __init__(self):
+        self = dict()
+
+    def add(self, key, value):
+        self[key] = value
+
+
+x = My_Dictionary()
+componentsAndPlacement = My_Dictionary()
+firstItemPlacement = My_Dictionary()
+traitAndPlacement = My_Dictionary()
+
+
+for i in range(0):
+    x.add(games[i],
+          {'Component 1: ' + str(carouselComp1[i]), 'Component 2: ' + str(comp2[i]), 'Component 3: ' + str(comp3[i]),
+           'Component 4: ' + str(comp4[i]), 'First Item Built: ' + str(fullItem1[i]),
+           'Second Item Built: ' + str(fullItem2[i]), 'Third Item Built: ' + str(fullItem3[i]),
+           'Fourth Item Built: ' + str(fullItem4[i]), 'Primary Trait: ' + str(trait1[i]),
+           'Secondary Trait: ' + str(trait2[i]), 'Tirtiary Trait: ' + str(trait3[i]),
+           'Placement: ' + str(placement[i]), 'Addtional Notes: ' + str(notes[i])})
+
+for i in range(0):
+    componentsAndPlacement.add(games[i], {'First Carousel Component: '+str(carouselComp1[i]),
+                                          'Placement: '+str(placement[i])})
+for i in range(0):
+    firstItemPlacement.add(games[i], {'First Complete Item: '+str(fullItem1[i]),
+                                          'Placement: '+str(placement[i])})
+for i in range(0):
+    traitAndPlacement.add(games[i], {'Major Trait: '+str(trait1[i]),
+                                          'Placement: '+str(placement[i])})
+traitList = [trait1,placement]
+componentList = [carouselComp1, placement]
+firstItemList = [fullItem1, placement]
+
+occurrencesTraits = collections.Counter(trait1)
+occurrencesPlacements = collections.Counter(placement)
+occurrencesItem1 = collections.Counter(fullItem1)
+occurrencesComp1 = collections.Counter(carouselComp1)
+
+print(occurrencesTraits)
+print(occurrencesPlacements)
+print(occurrencesComp1)
+print(occurrencesItem1)
+# print(traitList)
+
+
+# print(componentsAndPlacement)
 
