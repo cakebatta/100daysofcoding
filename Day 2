@@ -55,9 +55,9 @@ firstItemList = [fullItem1, placement]\
 uniqueTraits = set(trait1)
 uniqueCarousel = set(carouselComp1)
 uniqueFull = set(fullItem1)
-print(sorted(uniqueFull))
-print(sorted(uniqueCarousel))
-print(sorted(uniqueTraits))
+# print(sorted(uniqueFull))
+# print(sorted(uniqueCarousel))
+# print(sorted(uniqueTraits))
 occurrencesTraits = collections.Counter(trait1)
 occurrencesPlacements = collections.Counter(placement)
 occurrencesItem1 = collections.Counter(fullItem1)
@@ -84,8 +84,12 @@ def getSpecificPlacement(min_row,min_col,max_row,max_col,trait,traitlist):
         for cell in col:
             if cell.value == trait:
                 traitlist.append(ws.cell(row=cell.row,column=13).value)
+        if len(traitlist) > 3:
+            traitlist.append(statistics.mean(traitlist))
+        traitlist.append(trait)
+
 #these 33 lines of code are used to search the worksheet and append each list with the placement values.
-#i'm pretty sure there's a way to condense this massively and iterate through it, but it might include renaming 
+#i'm pretty sure there's a way to condense this massively and iterate through it, but it might include renaming
 #so that the syntax for list and traitlist are the same.
 
 brawler4 = []
@@ -125,7 +129,9 @@ getSpecificPlacement(42,10,81,10,'Warlord 9',warlord9)
 
 listOfLists = [brawler4, brawler6, cultist6, cultist9, duelist4, duelist6, dusk4, dusk6, elder6, hunter3, hunter4,
                hunter5, ninja4, shade3, sharp4, warlord6, warlord9]
-
+for list in listOfLists:
+    if len(list) >4:
+        print('Composition: '+str(list[-1])+'| Average placement: '+str(list[-2]))
 #create a function that gets the average of each list and appends the appropriate list with averages.
 
 # print(componentsAndPlacement)
