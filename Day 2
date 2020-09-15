@@ -1,0 +1,81 @@
+from openpyxl import *
+import collections
+workbook = load_workbook('TFT Set 4 PBE.xlsx')
+ws = workbook[workbook.sheetnames[0]]
+
+games = []
+carouselComp1 = []
+comp2 = []
+comp3 = []
+comp4 = []
+fullItem1 = []
+fullItem2 = []
+fullItem3 = []
+fullItem4 = []
+trait1 = []
+trait2 = []
+trait3 = []
+placement = []
+notes = []
+
+def getData(min_row, min_col, max_row, max_col, list):
+    for col in ws.iter_cols(min_row=min_row, min_col=min_col, max_row=max_row, max_col=max_col):
+        for cell in col:
+            list.append(cell.value)
+
+getData(42,1,81,1,games)
+getData(42,2,81,2,carouselComp1)
+getData(42,3,81,3,comp2)
+getData(42,4,81,4,comp3)
+getData(42,5,81,5,comp4)
+getData(42,6,81,6,fullItem1)
+getData(42,7,81,7,fullItem2)
+getData(42,8,81,8,fullItem3)
+getData(42,9,81,9,fullItem4)
+getData(42,10,81,10,trait1)
+getData(42,11,81,11,trait2)
+getData(42,12,81,12,trait3)
+getData(42,13,81,13,placement)
+getData(42,14,81,14,notes)
+
+
+class My_Dictionary(dict):
+    def __init__(self):
+        self = dict()
+
+    def add(self, key, value):
+        self[key] = value
+
+
+traitList = [trait1,placement]
+componentList = [carouselComp1, placement]
+firstItemList = [fullItem1, placement]\
+
+uniqueTraits = set(trait1)
+uniqueCarousel = set(carouselComp1)
+uniqueFull = set(fullItem1)
+# print(uniqueFull)
+# print(uniqueCarousel)
+# print(uniqueTraits)
+occurrencesTraits = collections.Counter(trait1)
+occurrencesPlacements = collections.Counter(placement)
+occurrencesItem1 = collections.Counter(fullItem1)
+occurrencesComp1 = collections.Counter(carouselComp1)
+
+# print(occurrencesTraits)
+# print(occurrencesPlacements)
+# print(occurrencesComp1)
+# print(occurrencesItem1)
+# print(traitList)
+trait1ByPlacement = list(zip(trait1, placement))
+carouselComp1ByPlacement = list(zip(carouselComp1, placement))
+fullItem1ByPlacement = list(zip(fullItem1, placement))
+
+trait1ByPlacement.sort()
+# print(trait1ByPlacement)
+
+#make a list for each unique trait, iterate through col/row "if cell value == trait, .append traitListPlacement"
+
+dusk4Placements = []
+
+# print(componentsAndPlacement)
