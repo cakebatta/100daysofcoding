@@ -1,5 +1,6 @@
 from openpyxl import *
 import collections
+import statistics
 workbook = load_workbook('TFT Set 4 PBE.xlsx')
 ws = workbook[workbook.sheetnames[0]]
 
@@ -54,9 +55,9 @@ firstItemList = [fullItem1, placement]\
 uniqueTraits = set(trait1)
 uniqueCarousel = set(carouselComp1)
 uniqueFull = set(fullItem1)
-# print(uniqueFull)
-# print(uniqueCarousel)
-# print(uniqueTraits)
+print(sorted(uniqueFull))
+print(sorted(uniqueCarousel))
+print(sorted(uniqueTraits))
 occurrencesTraits = collections.Counter(trait1)
 occurrencesPlacements = collections.Counter(placement)
 occurrencesItem1 = collections.Counter(fullItem1)
@@ -76,6 +77,55 @@ trait1ByPlacement.sort()
 
 #make a list for each unique trait, iterate through col/row "if cell value == trait, .append traitListPlacement"
 
-dusk4Placements = []
+
+
+def getSpecificPlacement(min_row,min_col,max_row,max_col,trait,traitlist):
+    for col in ws.iter_cols(min_row=min_row, min_col=min_col, max_row=max_row, max_col=max_col):
+        for cell in col:
+            if cell.value == trait:
+                traitlist.append(ws.cell(row=cell.row,column=13).value)
+#these 33 lines of code are used to search the worksheet and append each list with the placement values.
+#i'm pretty sure there's a way to condense this massively and iterate through it, but it might include renaming 
+#so that the syntax for list and traitlist are the same.
+
+brawler4 = []
+brawler6 = []
+cultist6 = []
+cultist9 = []
+duelist4 = []
+duelist6 = []
+dusk4 = []
+dusk6 = []
+elder6 = []
+hunter3 = []
+hunter4 = []
+hunter5 = []
+ninja4 = []
+shade3 = []
+sharp4 = []
+warlord6 = []
+warlord9 = []
+getSpecificPlacement(42,10,81,10,'Brawler 4',brawler4)
+getSpecificPlacement(42,10,81,10,'Brawler 6',brawler6)
+getSpecificPlacement(42,10,81,10,'Cultist 6',cultist6)
+getSpecificPlacement(42,10,81,10,'Cultist 9',cultist9)
+getSpecificPlacement(42,10,81,10,'Duelist 4',duelist4)
+getSpecificPlacement(42,10,81,10,'Duelist 6',duelist6)
+getSpecificPlacement(42,10,81,10,'Dusk 4',dusk4)
+getSpecificPlacement(42,10,81,10,'Dusk 6',dusk6)
+getSpecificPlacement(42,10,81,10,'Elder 6',elder6)
+getSpecificPlacement(42,10,81,10,'Hunter 3',hunter3)
+getSpecificPlacement(42,10,81,10,'Hunter 4',hunter4)
+getSpecificPlacement(42,10,81,10,'Hunter 5',hunter5)
+getSpecificPlacement(42,10,81,10,'Ninja 4',ninja4)
+getSpecificPlacement(42,10,81,10,'Shade 3',shade3)
+getSpecificPlacement(42,10,81,10,'Sharp 4', sharp4)
+getSpecificPlacement(42,10,81,10,'Warlord 6',warlord6)
+getSpecificPlacement(42,10,81,10,'Warlord 9',warlord9)
+
+listOfLists = [brawler4, brawler6, cultist6, cultist9, duelist4, duelist6, dusk4, dusk6, elder6, hunter3, hunter4,
+               hunter5, ninja4, shade3, sharp4, warlord6, warlord9]
+
+#create a function that gets the average of each list and appends the appropriate list with averages.
 
 # print(componentsAndPlacement)
